@@ -25,13 +25,26 @@ class ShopPage extends React.Component {
         const { updateCollections } = this.props;
         const collectionRef = firestore.collection('collections');
 
-        collectionRef.onSnapshot(async snapshot => {
-            // console.log(snapshot);
+        // this.unsubscribeFromSnapshot = collectionRef.onSnapshot(async snapshot => {
+        //     // console.log(snapshot);
+        //     const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
+        //     console.log(collectionsMap);
+        //     updateCollections(collectionsMap);
+        //     this.setState( {loading: false });
+        // });
+
+        // using promises against firebase
+        collectionRef.get()
+        .then(snapshot => {
             const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
-            console.log(collectionsMap);
             updateCollections(collectionsMap);
             this.setState( {loading: false });
         });
+        
+        // // using firebase native fetch api
+        // fetch('https://firestore.googleapis.com/v1/projects/crown-clothing-42605/databases/(default)/documents/collections')
+        // .then(response => response.json())
+        // .then(collections => console.log(collections));
     }
 
     render() {
