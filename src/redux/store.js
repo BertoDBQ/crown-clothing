@@ -1,11 +1,16 @@
 import { createStore, applyMiddleware } from 'redux';
 import { persistStore } from 'redux-persist'; 
 import logger from 'redux-logger';
-import thunk from 'redux-thunk';
+//import thunk from 'redux-thunk';
+import createSagaMiddleware from 'redux-saga';
 
 import rootReducer from './root-reducer';
+import rootSaga  from './root-saga';
 
-const middlewares = [thunk];
+const sagaMiddleware = createSagaMiddleware();
+const middlewares = [sagaMiddleware];
+// removed thunk when adding saga
+//const middlewares = [thunk];
 
 if (process.env.NODE_ENV === 'development') {
     middlewares.push(logger);
@@ -13,6 +18,8 @@ if (process.env.NODE_ENV === 'development') {
 
 // can i get rid of the export on the store and persistor
 export const store = createStore(rootReducer, applyMiddleware(...middlewares));
+
+sagaMiddleware.run(rootSaga);
 
 export const persistor = persistStore(store);
 
