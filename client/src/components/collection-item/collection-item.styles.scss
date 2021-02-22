@@ -20,6 +20,13 @@
     position: absolute;
     top: 255px;
     display: none;
+
+    @media screen and (max-width: 800px) {
+      display: block;
+      opacity: 0.9;
+      min-width: unset;
+      padding: 0 10px;
+    }
   }
 
   &:hover {
@@ -30,6 +37,21 @@
     .custom-button {
       opacity: 0.85;
       display: flex;
+    }
+  }
+
+  // 40vw - takes up 40% of the width of the full view
+  @media screen and (max-width: 800px) {
+    width: 40vw;
+
+    &:hover {
+      .image {
+        opacity: unset;
+      }
+
+      .custom-button {
+        opacity: unset;
+      }
     }
   }
 

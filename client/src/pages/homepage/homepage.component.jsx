@@ -10,6 +10,13 @@ import { HomePageContainer } from './homepage.styles';
 //     </div>
 // );
 
+// const HomePage = () => {
+//     throw Error;
+//     <HomePageContainer>
+//         <Directory />
+//     </HomePageContainer>
+// };
+
 const HomePage = () => (
     <HomePageContainer>
         <Directory />
