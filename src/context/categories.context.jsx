@@ -16,14 +16,11 @@ export const CategoriesProvider = ({ children }) => {
     // need to make a new async function within use effect
     // then call in the use effect
     const getCategoriesMap = async () => {
-      console.log('abc');
       const categoryMap = await getCategoriesAndDocuments();
-      console.log('abc-2');
-      console.log(categoryMap);
+      // console.log(categoryMap);
       setCategoriesMap(categoryMap);
     };
 
-    console.log('xxx');
     getCategoriesMap();
   }, []);
 

@@ -53,23 +53,23 @@ export const addCollectionAndDocuments = async (
   const batch = writeBatch(db);
 
   objectsToAdd.forEach((object) => {
-    console.log(object);
+    // console.log(object);
     const docRef = doc(collectionRef, object.title.toLowerCase());
     batch.set(docRef, object);
   });
 
   await batch.commit();
-  console.log('done');
+  // console.log('done');
 };
 
 export const getCategoriesAndDocuments = async () => {
   const collectionRef = collection(db, 'categories');
   const q = query(collectionRef);
 
-  console.log('get categories 1');
+  // console.log('get categories 1');
 
   const queryShapshot = await getDocs(q);
-  console.log('get categories 1a');
+  // console.log('get categories 1a');
   const categoryMap = queryShapshot.docs.reduce((acc, docSnapshot) => {
     const { title, items } = docSnapshot.data();
 
@@ -77,7 +77,7 @@ export const getCategoriesAndDocuments = async () => {
     return acc;
   }, {});
 
-  console.log('get categories 2');
+  // console.log('get categories 2');
 
   return categoryMap;
 };
@@ -89,11 +89,11 @@ export const createUserDocumentFromAuth = async (
   if (!userAuth) return;
 
   const userDocRef = doc(db, 'users', userAuth.uid);
-  console.log(userDocRef);
+  // console.log(userDocRef);
 
   const userSnapshot = await getDoc(userDocRef);
-  console.log(userSnapshot);
-  console.log(userSnapshot.exists());
+  // console.log(userSnapshot);
+  // console.log(userSnapshot.exists());
 
   if (!userSnapshot.exists()) {
     const { displayName, email } = userAuth;
@@ -107,7 +107,7 @@ export const createUserDocumentFromAuth = async (
         ...additionalInformation,
       });
     } catch (error) {
-      console.log('error creating user', error.message);
+      // console.log('error creating user', error.message);
     }
   }
 
